@@ -48,4 +48,13 @@ public class EmployeeDaoImpl extends AbstractSessionFactory implements EmployeeD
 
         return Optional.ofNullable(employee);
     }
+
+    @Override
+    @Transactional
+    public List<Employee> findByName(String name) {
+       return getSession().createQuery("select e from Employee e where e.name=:name")
+               .setParameter("name", name).list();
+
+
+    }
 }
